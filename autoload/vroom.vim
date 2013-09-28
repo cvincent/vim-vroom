@@ -191,6 +191,8 @@ function s:Run(cmd)
     call VimuxRunCommand(a:cmd)
   elseif g:vroom_use_dispatch && exists(':Dispatch')
     exec ":Dispatch " . a:cmd
+  elseif filereadable("tmp/vim-pipe")
+    exec ":!echo '" . a:cmd . "' > tmp/vim-pipe"
   else
     exec ":!" . a:cmd
   end
