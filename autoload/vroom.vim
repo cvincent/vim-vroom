@@ -192,7 +192,7 @@ function s:Run(cmd)
   elseif g:vroom_use_dispatch && exists(':Dispatch')
     exec ":Dispatch " . a:cmd
   elseif filereadable("tmp/vim-pipe")
-    silent exec ":!echo '" . s:ClearScreenCmdForPipe() . a:cmd . "' > tmp/vim-pipe"
+    exec ":!echo '" . s:ClearScreenCmdForPipe() . a:cmd . "' > tmp/vim-pipe"
   else
     exec ":!" . a:cmd
   end
