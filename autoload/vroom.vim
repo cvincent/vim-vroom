@@ -192,10 +192,19 @@ function s:Run(cmd)
   elseif g:vroom_use_dispatch && exists(':Dispatch')
     exec ":Dispatch " . a:cmd
   elseif filereadable("tmp/vim-pipe")
-    exec ":!echo '" . a:cmd . "' > tmp/vim-pipe"
+    exec ":!echo '" . s:ClearScreenCmdForPipe() . a:cmd . "' > tmp/vim-pipe"
   else
     exec ":!" . a:cmd
   end
+endfunction
+
+" Internal: Determine clears screen command for vim-pipe run
+function s:ClearScreenCmdForPipe()
+  if g:vroom_clear_screen
+    return "clear && "
+  else
+    return ""
+  endif
 endfunction
 
 " Internal: Clear the screen prior to running specs
